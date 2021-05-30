@@ -1,2 +1,15 @@
-// Regex to validate Carrefour and e-Leclerc ingredient lists (as published on their respective websites as of May 30th 2021)
+/* Regex to extract key information from Carrefour ingredient lists (as published on their respective websites as of May 30th 2021)
+   Validated using this MODIFIED ingredient declaration, retrieved from carrefour.fr on May 30th. Validated using https://regexr.com.
+   
+   Information extracted:
+   * Ingredient name
+   * Quid (percentage)
+   * Function of the additives
+   * Ingredient breakdows (opening and closing brackets)
+   
+   Eau, farine de BLE 18,6%, OEUFS 14%, jambon cuit supérieur 7,9% (jambon de porc 7,5%, sel, dextrose, arômes naturels, antioxydant : érythorbate de sodium, conservateur : nitrite de sodium), CREME fraîche 7,9%, lardons fumés au bois de hêtre 7,3% (poitrine de porc 6,9%, sel, dextrose, conservateurs : érythorbate de sodium et nitrite de sodium), BEURRE concentré, EMMENTAL râpé 3,1%, amidon modifié de maïs, LAIT écrémé en poudre, sel, colorant : E319, arôme naturel de muscade et autres arômes naturels, arôme naturel de poivre, épaississant : gomme xanthane, levure désactivée, épaissisant : son d'avoine.
+   
+*/
 
+REGEX:
+(?:[,])*(((?<fonction>[A-Za-zé ]+)[ ][:]+[ ])*(?<ingredient>(E[0-9]{3})*|([a-z A-Zéêôâîïœ/èà']*))+((?<quid>[\d]+[,]*[\d]*)[%]+[, ]*)*[ ]*(?<openBracket>[(])*)(?<closeBracket>[)])*(?:[;,. ])*
